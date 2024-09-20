@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <link rel="stylesheet" href="payment.css">
+  <style>
+    body {
+      background-color: #ffffff; /* Background color */
+      color: #333; /* Default text color */
+      font-family: Arial, sans-serif; /* Font family */
+    }
+    .payment-container {
+      padding: 20px;
+      background-color: #f89579; /* Background color for container */
+      border-radius: 8px; /* Rounded corners */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for better emphasis */
+      max-width: 800px; /* Maximum width for larger screens */
+      margin: auto; /* Center container horizontally */
+    }
+    h2, h4 {
+      margin-top: 0; /* Remove top margin from headings */
+      color: #000000; /* Heading color */
+    }
+    .cart-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px; /* Space between cart summary and payment form */
+    }
+    .cart-summary-item {
+      display: flex;
+      flex-direction: column; /* Arrange items vertically */
+      align-items: flex-start; /* Align items to the start */
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%; /* Full width for each item */
+      box-sizing: border-box;
+      background-color: #ffffff; /* Background color for items */
+    }
+    .cart-item-image {
+      width: 100px; /* Size of images */
+      height: 100px; /* Size of images */
+      object-fit: cover;
+      margin-bottom: 10px; /* Space below image */
+    }
+    label {
+      display: block; /* Block display for labels */
+      margin-bottom: 8px; /* Space between label and input */
+    }
+    input[type="text"], input[type="tel"], textarea {
+      width: 100%; /* Full width for inputs */
+      padding: 8px; /* Padding for better spacing */
+      border: 1px solid #ddd; /* Border for inputs */
+      border-radius: 4px; /* Rounded corners for inputs */
+      box-sizing: border-box; /* Include padding and border in element's total width and height */
+      margin-bottom: 12px; /* Space between input fields */
+    }
+    textarea {
+      resize: vertical; /* Allow vertical resizing only */
+      height: 100px; /* Default height */
+    }
+    button {
+      background-color: #ffffff; /* White background */
+      color: #333; /* Dark text color */
+      border: 1px solid #ddd; /* Light gray border */
+      padding: 10px 20px; /* Padding for button */
+      border-radius: 4px; /* Rounded corners */
+      cursor: pointer; /* Pointer cursor on hover */
+      font-size: 16px; /* Font size for button */
+      transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effects */
+      display: none; /* Hide button initially */
+    }
+    button:hover {
+      background-color: #f0f0f0; /* Slightly gray background on hover */
+      border-color: #bbb; /* Darker border color on hover */
+    }
+    .btn-add-to-cart {
+      background-color: #ffffff; /* White background */
+      color: #f6251a; /* Button text color */
+      border: 1px solid #f6251a; /* Red border */
+    }
+    #total-amount {
+      margin-bottom: 20px; /* Space below total amount */
+      font-size: 18px; /* Font size for total amount */
+      font-weight: bold; /* Bold text */
+      color: #272525; /* Color of total amount */
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <div class="payment-container">
+      <h2>Your Cart</h2>
+      <div id="cart-summary" class="cart-summary"></div>
+      
+      <!-- Total Amount Display -->
+      <div id="total-amount"></div>
+      
+      <h2>Complete Your Payment</h2>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdmxuO2ZUuv4NpkykxBl7EzGtz_Jbqdw9sTU4ewdHCSBImwQg/viewform?embedded=true" width="640" height="1722" frameborder="0" marginheight="0" marginwidth="0" id="payment-form">Loading…</iframe>
+      
+      <button id="payment-success-btn" onclick="handleButtonClick()">Payment Done</button>
+    </div>
+  </main>
+  
+  <script>
+    function displayCartSummary() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartSummary = document.getElementById('cart-summary');
+      cartSummary.innerHTML = '';
+      cart.forEach(item => {
+        cartSummary.innerHTML += `
+          <div class="cart-summary-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-summary-details">
+              <h4>${item.name}</h4>
+              <p>Price: $${item.price.toFixed(2)}</p>
+              <p>Quantity: ${item.quantity}</p>
+            </div>
+          </div>
+        `;
+      });
+
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      document.getElementById('total-amount').innerText = `Total Amount: $${totalPrice.toFixed(2)}`;
+    }
+
+    function handleFormSubmit() {
+      localStorage.removeItem('cart');
+      alert('Payment Successful');
+      setTimeout(function() {
+        window.location.href = 'index.html'; // Update this to your home page URL
+      }, 3000); // 3 seconds delay
+    }
+
+    function handleButtonClick() {
+      window.location.href = 'index.html'; // Update this to your home page URL
+    }
+
+    function onFormLoad() {
+      const iframe = document.getElementById('payment-form');
+      iframe.onload = function() {
+        // Simulate form submission handling by Google Forms
+        handleFormSubmit();
+      };
+    }
+
+    window.addEventListener('load', function() {
+      displayCartSummary();
+      onFormLoad();
+    });
+  </script>
+</body>
+</html>
