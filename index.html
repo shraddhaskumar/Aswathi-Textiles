@@ -31,37 +31,32 @@
 
 <body class="index-page">
 
-<header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container position-relative d-flex align-items-center justify-content-between">
-
-        <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-            <h1 class="sitename">Aswathy Textiles</h1>
-            <span>.</span>
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-            <ul>
-                <li><a href="#hero" class="active">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-
-        <!-- Cart icon and Clear Cart Button for mobile -->
-        <div class="cart-section d-flex align-items-center">
-            <button id="clear-cart" class="btn btn-danger ms-3 d-none d-md-block">Clear Cart</button>
-        </div>
-
-        <a class="btn-getstarted d-none d-md-block" href="#products">Order Now</a>
+  <header class="b-header">
+    <div class="b-logo"><a href="#">Aswathi Textiles</a></div>
+    <ul class="b-nav-menu">
+      <li>Home</li>
+      <li>About Us</li>
+      <li>Products</li>
+      <li>Contact</li>
+    </ul>
+    <div class="b-action">
+      <button class=" btn btn-danger">Clear Cart</button>
+      <button class=" btn btn-primary">Order Now</button>
     </div>
-
-    <!-- Clear Cart Button for smaller screens (shown below the cart icon) -->
-    <button id="clear-cart-mobile" class="btn btn-danger d-block d-md-none mt-2">Clear Cart</button>
-</header>
-
-
+    <i class="b-hamburger bi bi-list"></i>
+    <div class="b-dropdown">
+      <ul class="b-nav-menu-mobile">
+        <li>Home</li>
+        <li>About Us</li>
+        <li>Products</li>
+        <li>Contact</li>
+      </ul>
+      <div class="b-action-mobile">
+        <button class=" btn btn-danger">Clear Cart</button>
+        <button class=" btn btn-primary">Order Now</button>
+      </div>
+    </div>
+  </header>
 
   <main class="main">
 
@@ -145,13 +140,6 @@
 
 </section><!-- /About Section -->
 
-
-<div id="cart-container">
-  <button id="cart-btn">
-    <img src="assets/img/cart-icon.png" alt="Cart" id="cart-icon" />
-    <span id="cart-count">0</span>
-  </button>
-</div>
 
 <!-- Products Section -->
 <section id="products" class="products section">
@@ -466,6 +454,33 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    // bifin
+    document.addEventListener("DOMContentLoaded", function() {
+      const hamburgerIcon = document.querySelector(".b-hamburger");
+      const dropdownMenu = document.querySelector(".b-dropdown");
+      let isOpen = false;
+    
+      hamburgerIcon.addEventListener("click", function() {
+        console.log("clicked")
+        if (!isOpen) {
+          // Open the dropdown and change icon to 'bi-x' (cross)
+          dropdownMenu.style.top = "70px";
+          hamburgerIcon.classList.remove("bi-list");
+          hamburgerIcon.classList.add("bi-x");
+          isOpen = true;
+        } else {
+          // Close the dropdown and change icon back to 'bi-list'
+          dropdownMenu.style.top = "-170px";
+          hamburgerIcon.classList.remove("bi-x");
+          hamburgerIcon.classList.add("bi-list");
+          isOpen = false;
+        }
+      });
+    });
+
+  </script>
 
 </body>
 

@@ -1116,3 +1116,98 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+
+/* Bifin */
+.b-header{
+  height: 70px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  color: var(--default-color);
+  background-color: var(--nav-color);
+  z-index: 9999;
+}
+.b-logo{
+  font-size: clamp(20px, 2.5rem, 40px);
+  background: linear-gradient(to bottom, #eec860, #d34909);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  width: 100%;
+}
+.b-nav-menu{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+.b-nav-menu li{
+  list-style: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--nav-color);
+  cursor: pointer;
+}
+.b-action{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.b-hamburger{
+  font-size: 2rem;
+  color: #000000;
+  display: none;
+}
+.b-dropdown {
+  z-index: 899;
+  width: 100%;
+  position: absolute;
+  top: -170px;
+  left: 0;
+  background: var(--nav-mobile-background-color);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  transition: all 1s ease-in-out;
+}
+.b-nav-menu-mobile{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.b-nav-menu-mobile li{
+  list-style: none;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--nav-color);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .b-hamburger{
+    display: block;
+  }
+  .b-nav-menu,
+  .b-action {
+    display: none;
+  }
+  .b-dropdown {
+    display: flex;
+  }
+}
